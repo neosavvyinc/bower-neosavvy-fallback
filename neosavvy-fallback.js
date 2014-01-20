@@ -1,4 +1,4 @@
-/*! neosavvy-fallback - v0.0.1 - 2014-01-13
+/*! neosavvy-fallback - v0.0.2 - 2014-01-20
 * Copyright (c) 2014 Neosavvy, Inc.; Licensed  */
 (function (window, angular, nsCore) {
     if (nsCore) {
@@ -153,8 +153,23 @@
 
         function _evaluateDom() {
             var found = [],
-                allElements = document.getElementsByTagName("*");
+                allElements = document.getElementsByTagName("*"),
+                hasAttributeFallback;
+
+            //IE7 hasAttribute fallback
+            if (!window.Element || !window.Element.prototype || !window.Element.prototype.hasAttribute) {
+                hasAttributeFallback = function hasAttribute (attrName) {
+                    return typeof this[attrName] !== 'undefined';
+                }
+            }
+
             for (var i = 0; i < allElements.length; i++) {
+                //Apply if valid
+                if (hasAttributeFallback) {
+                    allElements[i].hasAttribute = hasAttributeFallback;
+                }
+
+                //This case happens in all cases
                 if (allElements[i].hasAttribute('ns-fallback')) {
                     found.push(allElements[i]);
                 }
