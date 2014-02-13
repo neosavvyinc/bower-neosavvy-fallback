@@ -1,4 +1,4 @@
-/*! neosavvy-fallback - v0.0.2 - 2014-01-20
+/*! neosavvy-fallback - v0.0.2 - 2014-02-13
 * Copyright (c) 2014 Neosavvy, Inc.; Licensed  */
 (function (window, angular, nsCore) {
     if (nsCore) {
