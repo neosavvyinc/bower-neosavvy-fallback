@@ -1,4 +1,4 @@
-/*! neosavvy-fallback - v0.0.3 - 2014-02-13
+/*! neosavvy-fallback - v0.0.4 - 2014-03-07
 * Copyright (c) 2014 Neosavvy, Inc.; Licensed  */
 (function (window, angular, nsCore) {
     if (nsCore) {
@@ -114,9 +114,15 @@
         }
 
         function _bootstrap(element) {
-            angular.element(document).ready(function () {
-                angular.bootstrap(element, [element.getAttribute('ns-fallback')]);
-            });
+            if (element.getAttribute('bootstrap-script')) {
+                $.getScript(element.getAttribute('bootstrap-script'));
+            } else if (angular) {
+                angular.element(document).ready(function () {
+                    angular.bootstrap(element, [element.getAttribute('ns-fallback')]);
+                });
+            } else {
+                throw "You are a bypassing browser fallback, but you have defined no bootstrap-script on your ns-fallback element.";
+            }
         }
 
         function _applyFallback(element, info) {
@@ -158,7 +164,7 @@
 
             //IE7 hasAttribute fallback
             if (!window.Element || !window.Element.prototype || !window.Element.prototype.hasAttribute) {
-                hasAttributeFallback = function hasAttribute (attrName) {
+                hasAttributeFallback = function hasAttribute(attrName) {
                     return typeof this[attrName] !== 'undefined';
                 }
             }
@@ -194,7 +200,10 @@
         //Call to kick off dom evaluation
         $(document).ready(_evaluateDom);
 
-        
+        if (window.jasmine) {
+            Neosavvy.Fallback.evaluateDom = _evaluateDom;
+            Neosavvy.Fallback.defaultTemplate = _defaultTemplate;
+        }
     } else {
         throw "You must include neosavvy-javascript-core to use the fallback library!";
     }

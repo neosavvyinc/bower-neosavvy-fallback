@@ -60,6 +60,12 @@ Put this in the place of what would otherwise be the ng-app tag.
 <body ns-fallback="myAngularApp"> ... </body>
 ```
 
+Not using Angular? Have a more nuanced application startup? It can load whatever you like.
+
+```HTML
+<body ns-fallback bootstrap-script="path/to/my/custom/script.js"> ... </body>
+```
+
 Everything is allowed by default. Disallow certain browsers (Default Template).
 
 ```HTML
@@ -106,5 +112,4 @@ Specify custom template for fallback. Available variables:
 ## Coming Soon
 
 * As needed loading of jQuery 1.9.1.
-* Support for custom bootstrap scripts (instead of just ng-app).
-* Non Angular support (Ember, Backbone, Whatever you like).
+* As needed loading of neosavvy-javascript-core.
