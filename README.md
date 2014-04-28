@@ -37,15 +37,7 @@ To run unit tests while developing,
 
 ## Dependencies
 
-```JavaScript
-/* jQuery 1.9.1 is used for the purpose of falling back
-to older browsers, conditionally include it if you have,
-a newer version available */
-
-"angular": "1.2.4",
-"neosavvy-javascript-core": "0.0.7",
-"jquery": "1.9.1"
-```
+None!
 
 
 ## How to use
@@ -107,9 +99,3 @@ Specify custom template for fallback. Available variables:
   min-internet-explorer="10"
   fallback-template="app/views/browser-not-supported.html"> ... </body>
 ```
-
-
-## Coming Soon
-
-* As needed loading of jQuery 1.9.1.
-* As needed loading of neosavvy-javascript-core.
